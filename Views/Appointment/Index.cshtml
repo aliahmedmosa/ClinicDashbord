@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Appointment>
+
+@{
+    ViewData["Title"] = "Appointments";
+    Layout = "_Admin";
+}
+
+
+<p>
+    <a asp-action="Add" class="btn btn-success btn-sm">Create New</a>
+</p>
+
+<table class="table" id="tblStudent">
+    <thead>
+        <tr>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientBirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>
+            <th>
+                Doctor
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+         <tr class="Item-row">
+           
+            <td>
+                @item.PatientName
+            </td>
+            <td>
+                @item.PatientBirthDate.ToString("dd-MMMM-yyyy")
+            </td>
+            <td>
+                @item.AppointmentDate.ToString("dd-MMMM-yyyy H:mm tt")
+            </td>
+            <td>
+                @item.Doctor.DoctorName
+            </td>
+            <td>
+                <a class="btn btn-sm btn-warning text-light" asp-controller="Appointment" asp-action="edit" asp-route-id="@item.ID" >Edit</a> ||
+                <a href="javascript:;" class="btn btn-sm btn-danger text-light js-delete" data-id="@item.ID" data-controller="Appointment">Delete</a> 
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts{
+    <script src="~/js/AjaxDelete.js"></script>
+}

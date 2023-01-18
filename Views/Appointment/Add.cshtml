@@ -1,0 +1,50 @@
+﻿@model AliMosaclinicTask.Models.Appointment
+@{
+    ViewData["Title"] = "Add Appointment";
+    Layout = "_Admin";
+}
+
+<h4>Create Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mt-4">
+                <label asp-for="PatientName" class="control-label"></label>
+                <input asp-for="PatientName" class="form-control" />
+                <span asp-validation-for="PatientName" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mt-4">
+                <label asp-for="PatientBirthDate" class="control-label"></label>
+                <input asp-for="PatientBirthDate" class="form-control" />
+                <span asp-validation-for="PatientBirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4">
+                <label asp-for="AppointmentDate" class="control-label"></label>
+                <input asp-for="AppointmentDate" class="form-control" />
+                <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mt-4">
+                <label asp-for="DoctorID" class="control-label"></label>
+                <select asp-for="DoctorID" class ="form-control" 
+                        asp-items="@(new SelectList(ViewBag.DoctorsList,"ID","DoctorName"))">
+                        <option value="0"> Select Doctor For Appointment.....</option>
+                </select>
+            </div>
+            <div class="form-group  mt-4">
+                <input type="submit" value="add" class="btn btn-primary btn-sm" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
